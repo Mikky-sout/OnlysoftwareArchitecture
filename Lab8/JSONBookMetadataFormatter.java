@@ -16,9 +16,19 @@ public class JSONBookMetadataFormatter implements BookMetadataFormatter {
     @Override
     public BookMetadataFormatter append(Book b) {
         JSONObject obj = new JSONObject();
-        obj.put("ISBN",new String(b.getISBN()));
-        obj.put("Title",new String(b.getTitle()));
-
+        obj.put("ISBN",b.getISBN());
+        obj.put("Title",b.getTitle());
+        obj.put("Publisher",b.getPublisher());
+        String[] author = b.getAuthors();
+        String AllAuthor = "";
+        for (int i = 0;i<author.length;i++){
+            if (i != (author.length-1)){
+                AllAuthor+=author[i] + " | ";
+            }else{
+                AllAuthor+=author[i];
+            }
+        }
+        obj.put("Author",AllAuthor);
         arr.add(obj);
         return this;
     }
